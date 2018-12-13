@@ -1,0 +1,95 @@
+.el-dialog {
+    .lookTitle {
+      font-size: 40px;
+      color: black;
+    }
+    .el-dialog__body {
+      padding-top: 16px;
+      padding-bottom: 20px;
+    }
+    .lookContent {
+      height: 420px;
+      .title {
+        // border: 1px solid red;
+        border-bottom: 1px solid #dcdfe6;
+        padding-bottom: 20px;
+        // margin-bottom: 20px;
+        font-size: 16px;
+        color: #909399;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .title_item {
+          display: flex;
+          align-items: center;
+          > div {
+            margin-right: 50px;
+            // margin-bottom: 2px;
+          }
+        }
+      }
+      .noticeName {
+        padding: 13px 30px;
+        background: #f5f6fa;
+        color: #67c23a;
+        font-size: 16px;
+        line-height: 2;
+      }
+      .noticeContent {
+        padding: 16px 0;
+        font-size: 16px;
+        color: #909399;
+        img {
+          display: block;
+          max-width: 100%;
+          margin: 0 auto;
+        }
+      }
+    }
+    .select_title{
+      display:flex;
+      align-items:center;
+      >div{
+        font-size: 18px;
+      }
+    }
+    .textarea{
+      margin: 20px 0;
+    }
+    
+}
+
+.noticeContent{
+  .audio{
+    // text-align: center;
+    width: 345px;
+    margin: 0 auto;
+    padding: 10px ;
+    display: flex;
+    border: 1px solid #DCDCDC;
+    align-items: center;
+    margin-bottom: 20px;
+    .img{
+        display: block;
+        width: 52px;
+        height: 52px;
+    }
+    .progressdiv{ 
+      padding: 0 20px;
+      flex: 1;
+      .progress{
+        margin: 10px 0;
+        background: #DBDBDB;
+        height: 2px;
+        .progressnum{
+          width: 0;
+          // width: 50%;
+          height: 2px;
+          background: #FFEA55;
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,201 @@
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+#login-section{
+    width: 100%;
+    height: 100%;
+    // div{
+    //     height: 100%;
+        video{
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            display: block;
+        }
+    // }
+    .shade{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.5);
+    }
+    #login-container{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        width: 390px;
+        height: 765px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin-top: -382.5px;
+        margin-left: -195px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        align-items: center;
+        >div:nth-child(1){
+            img{
+                max-width: 100%;
+            }
+        }
+        >div:nth-child(2){
+            margin-top: 37px;
+            margin-bottom: 50px;
+            font-size: 48px;
+            color: #FFDE2A;
+            font-weight: bold;
+            letter-spacing: .1em;
+        }
+        
+       .login-go{
+           margin-top: 30px;
+           width: 100%;
+           .el-button{
+               border: none;
+               width: 100%;
+               color: #000;
+               font-size:20px;
+               border-radius:10px;
+               background: #FFDE2A;
+               &:hover{
+                background: #ffe55e;
+                border-color: #ffe55e;
+               }
+               &:disabled{
+                background: #E4E7ED;
+               }
+           }
+           .back{
+               margin-left: 0;
+               margin-top: 5px;
+           }
+       }
+       .login-section{
+           width: 100%;
+           margin-top: 20px;
+           display: -webkit-box;
+           display: -ms-flexbox;
+           display: flex;
+           -webkit-box-pack: justify;
+               -ms-flex-pack: justify;
+                   justify-content: space-between;
+           color: #fff;
+           -webkit-box-align: center;
+               -ms-flex-align: center;
+                   align-items: center;
+           >div{
+                color: inherit;
+                font-size: 20px;
+                .el-checkbox{
+                    font-size: inherit;
+                    color: inherit;
+                    span{
+                        font-size: 18px;
+                    }
+                }
+                a{
+                    color: white;
+                    text-decoration: none;
+                    &.protocol{
+                        color: #FFDE2A;
+                    }
+                }
+           }
+            
+       }
+        form{
+            width: 100%;
+            .el-form-item{
+                border-bottom: 1px solid #E6E6E6;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                color: #FFF;
+                font-size: 18px;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                // justify-content: center;
+                >div{
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
+                    // width: 82%;
+                    -webkit-box-flex: 4;
+                        -ms-flex: 4;
+                            flex: 4;
+                    .el-input{
+                        -webkit-box-flex: 2;
+                            -ms-flex: 2;
+                                flex: 2;
+                    }
+                    .code{
+                        margin-left: 10px;
+                        display: inline-block;
+                        -webkit-box-flex: 1;
+                            -ms-flex: 1;
+                                flex: 1;
+                        // width: 85px;
+                         img{
+                            display: block;
+                            max-width: 100%;
+                         }
+                         button{
+                             padding: 7px 8px;
+                             width: 100%;
+                             font-size: 16px;
+                             border: none;
+                             background:rgba(255,222,42,1);
+                             border-radius:4px;
+                             color: #000000;
+                             &:disabled{
+                                 background: #E4E7ED;
+                             }
+                         }
+                    }
+                }
+
+                label{
+                    text-align:justify;
+                    text-justify:distribute-all-lines;/*ie6-8*/
+                    text-align-last:justify;/* ie9*/
+                    -moz-text-align-last:justify;/*ff*/
+                    -webkit-text-align-last:justify;/*chrome 20+*/
+                    -webkit-box-flex: 1;
+                        -ms-flex: 1;
+                            flex: 1;
+                    color: inherit;
+                    font-size: inherit;
+                }
+                .el-input{
+                    input{
+                        font-size: 18px;
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        font-size: initial; 
+                        color: inherit;
+                    }
+                }
+            }
+         }
+    }
+}
