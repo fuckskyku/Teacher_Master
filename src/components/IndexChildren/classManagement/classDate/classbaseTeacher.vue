@@ -127,6 +127,7 @@
               <el-select
                 v-model="domain.teacherId"
                 placeholder="请选择"
+                filterable
                 @change="teacherChange(domain)"
               >
                 <el-option

@@ -49,7 +49,7 @@
           <span>第二步</span>
         </div>
         <div class="addone">
-          <div>设置一下提交作业的时间:</div>
+          <div>提交作业的时间:</div>
           <div class="time">
             <el-date-picker
               v-model="homeWorkObj.submitTime"
@@ -61,8 +61,8 @@
           </div>
         </div>
         <div class="addtwo">
-          <div>给你的作业起个名字吧:</div>
-          <el-input v-model="homeWorkObj.homeWorkTitle" placeholder="请输入内容"></el-input>
+          <div>标题:</div>
+          <el-input v-model="homeWorkObj.homeWorkTitle" placeholder="请输入标题（40字以内）"></el-input>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
           <span>第三步</span>
         </div>
         <div class="addone">
-          <div>赶紧输入内容吧:</div>
+          <div>内容:</div>
           <quill-editor
             v-model="homeWorkObj.content"
             ref="myQuillEditor"
@@ -102,7 +102,7 @@
       :fullscreen="false"
       width="580px"
       top="30vh"
-      :show-close="false"
+      :show-close="true"
       :close-on-click-modal="false"
     >
       <div class="notice">
@@ -115,17 +115,23 @@
             style="font-size:16px;margin-top:10px"
             v-if="integralObj?integralObj.receiveBonusPoint?true:false:false"
           >
-            <img
+            <!-- <img
               src="/static/insetImg/插画/流程步骤/发布作业/integral.png"
               alt
               style="vertical-align:middle;"
-            >
-            恭喜您获得{{integralObj?integralObj.receiveBonusPoint:''}}积分
+            > -->
+            <!-- 恭喜您获得{{integralObj?integralObj.receiveBonusPoint:''}}积分 -->
+            <div v-if="integralObj.receiveBonusPoint != '' && integralObj.allBonusPoint != ''">
+              恭喜您获得<span style="color:red;">{{integralObj ? integralObj.receiveBonusPoint:''}}</span>积分,当前总积分<span style="color:red;">{{integralObj?integralObj.allBonusPoint:''}}</span>分
+            </div>
+            <div v-if="integralObj.allBonusPoint == '' && integralObj.receiveBonusPoint != ''">
+              恭喜您获得{{integralObj ? integralObj.receiveBonusPoint:''}}积分
+            </div>
           </div>
         </div>
         <el-row>
-          <el-button round @click="okHomeWorkOne">退出</el-button>
-          <el-button round @click="okHomeWork">进入列表</el-button>
+          <el-button round @click="skip('integralDetail',true);dialogTableVisible=false">去兑换</el-button>
+          <el-button round @click="skip('integralDetail')">查看积分</el-button>
         </el-row>
       </div>
     </el-dialog>
@@ -188,7 +194,13 @@
     </el-dialog>
 
     <!-- 预览 -->
-    <el-dialog :visible.sync="dialogTableVisibleLook" :fullscreen="false" width="1200px" top="15vh" :close-on-click-modal="false">
+    <el-dialog
+      :visible.sync="dialogTableVisibleLook"
+      :fullscreen="false"
+      width="1200px"
+      top="15vh"
+      :close-on-click-modal="false"
+    >
       <div slot="title" class="lookTitle">{{homeWorkObj?homeWorkObj.homeWorkTitle:''}}</div>
       <el-scrollbar :native="false" tag="section">
         <div class="lookContent" style="height:420px">
@@ -200,13 +212,15 @@
               <time>科目：{{preview(homeWorkObj.subjectVal)}}</time>
             </div>
             <div class="title_item">
-              <time>{{homeWorkObj?'完成作业时间：'+homeWorkObj.submitTime:''}}</time>
+              <time>{{homeWorkObj?'作业提交时间：'+homeWorkObj.submitTime:''}}</time>
+            </div>
+
+            <div class="noticeName" v-if="true">
+              通知班级：
+              <span v-for="(item,index) in homeWorkObj.dynamicTags" :key="index">{{item.label}}</span>
             </div>
           </div>
-          <div class="noticeName" v-if="true">
-            通知班级：
-            <span v-for="(item,index) in homeWorkObj.dynamicTags" :key="index">{{item.label}}</span>
-          </div>
+
           <div class="noticeContent" v-html="homeWorkObj?homeWorkObj.content:''"></div>
         </div>
       </el-scrollbar>
@@ -290,10 +304,11 @@ export default {
         headers: { Authorization: TOKEN },
         // Authorization: TOKEN,  // 可选参数 如果需要token验证，假设你的token有存放在sessionStorage
         name: "file", // 可选参数 文件的参数名 默认为img
-        size: 500, // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
+        size: 3072, // 可选参数   图片限制大小，单位为Kb, 1M = 1024Kb
         accept: "image/png, image/gif, image/jpeg, image/bmp, image/x-icon", // 可选参数 可上传的图片格式
         // input点击事件  formData是提交的表单实体
-        change: formData => {},
+        change: formData => {
+        },
         // 设置请求头 xhr: 异步请求， formData: 表单对象
         header: (xhr, formData) => {
           xhr.setRequestHeader("Authorization", TOKEN);
@@ -301,9 +316,11 @@ export default {
         },
         // start: function (){}
         start: () => {}, // 可选参数 接收一个函数 开始上传数据时会触发
-        end: () => {}, // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
+        end: () => {
+        }, // 可选参数 接收一个函数 上传数据完成（成功或者失败）时会触发
         success: () => {}, // 可选参数 接收一个函数 上传数据成功时会触发
-        error: () => {} // 可选参数 接收一个函数 上传数据中断时会触发
+        error: () => {
+        } // 可选参数 接收一个函数 上传数据中断时会触发
       },
       // 以下所有设置都和vue-quill-editor本身所对应
       placeholder: "请输入内容", // 可选参数 富文本框内的提示语
@@ -461,6 +478,7 @@ export default {
               this.integralObj = res.data.data;
             } else {
               LoadingShow.close();
+              alert(1)
               this.$message({
                 message: res.data.message,
                 type: "warning",
@@ -559,7 +577,7 @@ export default {
     Save() {
       if (this.homeWorkObj.homeWorkTitle == "") {
         this.$message({
-          message: "请输入作业名称",
+          message: "请输入作业标题",
           type: "warning",
           center: true
         });
@@ -630,6 +648,14 @@ export default {
 
     DraftBox() {
       this.Save();
+    },
+    skip(type,prams) {
+      this.$router.push({
+        name: type,
+        query: {
+          isShow: prams
+        }
+      });
     }
   },
 

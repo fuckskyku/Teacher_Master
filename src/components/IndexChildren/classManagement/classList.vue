@@ -76,7 +76,8 @@ export default {
           pathName: "",
           children: [
             { label: "学业成绩", pathName: "schoolAchievement" },
-            { label: "平时成绩", pathName: "PeacetimePerformance" }
+            { label: "平时成绩", pathName: "PeacetimePerformance" },
+            { label: "发送记录", pathName: "" }
           ]
         },
         {

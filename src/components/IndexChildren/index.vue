@@ -161,6 +161,9 @@
       </div>
       <div>
         <div @click="skip('classList')" v-if="controlShow.isHeadTeacher==1">
+          <div class="relative" v-if="relatvieShow">
+            <img src="/static/tip.png" alt>
+          </div>
           <div>
             <img src="/static/img/班级管理.png" alt>
           </div>
@@ -188,7 +191,6 @@
         </div>
       </div>
     </div>
-
     <!-- <div class="index_footer" v-if="controlShow.leading_in==3?true:false">
       <img src="/static/img/wave1.png" alt="">
       <img src="/static/img/wave2.png" alt="">
@@ -196,29 +198,166 @@
     </div>-->
     <!-- 通知 -->
     <el-dialog
+      id="register"
       :visible.sync="dialogTableVisible"
       :fullscreen="false"
       width="480px"
-      top="30vh"
+      top="15vh"
       :show-close="false"
       :close-on-click-modal="false"
     >
       <div class="notice">
-        <div>
-          <img src="/static/insetImg/插画/流程步骤/发布作业/发布成功.png" alt>
+        <div @click="goRegister">
+          <img src="/static/register.png" alt>
         </div>
-        <div class="text">
-          <div>每天首次登录获得积分</div>
-          <div style="font-size:16px;margin-top:10px">
-            <!-- <img src="/static/insetImg/插画/流程步骤/发布作业/integral.png" alt="" style="vertical-align:middle;"> -->
-            恭喜获取{{integralObj?integralObj.receiveBonusPoint:''}}积分
-          </div>
-        </div>
-        <el-row>
+        <el-row style="margin-top:20px;">
           <el-button round @click="dialogTableVisible=false">关闭</el-button>
         </el-row>
       </div>
     </el-dialog>
+    <!-- 通知结束 -->
+
+    <!-- 报名 -->
+    <!-- <div class="suspend" v-if="dialogTableVisible2">
+      <a href="http://dbqw0ng9pmd3cnjm.mikecrm.com/GcJmP3h" target="_blank">
+        <img src="/static/suspend.png" alt @click="signUp()">
+      </a>
+    </div>
+    <el-dialog
+      :visible.sync="dialogTableVisible1"
+      :fullscreen="false"
+      width="1200px"
+      top="5vh"
+      :show-close="false"
+      :close-on-click-modal="false"
+      id="RedEnvelope"
+    >
+      <section>
+        <div class="close">
+          <img
+            src="/static/close.png"
+            alt
+            @click="dialogTableVisible1=false;dialogTableVisible2=true"
+          >
+        </div>
+        <a href="http://dbqw0ng9pmd3cnjm.mikecrm.com/GcJmP3h" target="_blank">
+          <img style="max-width:100%;" src="/static/signUp.png" alt @click="signUp">
+        </a>
+      </section>
+    </el-dialog> -->
+    <!-- 报名结束 -->
+    <!-- 红包领取 -->
+    <!-- <div class="suspend" v-if="dialogTableVisibleRed2">
+      <img src="/static/SmallIcon.png" alt @click="redRoll()">
+    </div>
+    <el-dialog
+      :visible.sync="dialogTableVisibleRed"
+      :fullscreen="false"
+      width="1200px"
+      top="5vh"
+      :show-close="false"
+      :close-on-click-modal="false"
+      id="RedEnvelope"
+    >
+      <section>
+        <img style="max-width:100%;" src="/static/Redenvelopecollection.png" alt>
+        <div class="close">
+          <img
+            src="/static/close.png"
+            alt
+            @click="dialogTableVisibleRed=false;dialogTableVisibleRed2=true"
+          >
+        </div>
+        <div class="rollContainer">
+          <div class="rollContainerActivity" id="rollContainerActivity">
+            <div
+              class="roll_item"
+              v-for="(item,index) in redPacketList"
+              :key="index"
+            >恭喜{{item}}获取10元奖励</div>
+          </div>
+        </div>
+        <div class="giftsButton">
+          <img src="/static/giftsButton.png" alt @click="RedEnvelopeCollection">
+        </div>
+      </section>
+
+      <el-dialog
+        width="30%"
+        :visible.sync="innerVisible"
+        append-to-body
+        :show-close="false"
+        :close-on-click-modal="false"
+        id="innerVisible"
+        top="6.8vh"
+        style="box-shadow: none;background: transparent;"
+      >
+        <section v-if="redType==0">
+          <img style="max-width:100%;" src="/static/Receivesuccess.png" alt>
+          <div class="close">
+            <img src="/static/close.png" alt @click="innerVisible=false">
+          </div>
+        </section>
+        <section v-if="redType==1">
+          <img style="max-width:100%;" src="/static/bindingDig.png" alt>
+          <div class="close">
+            <img src="/static/close.png" alt @click="innerVisible=false">
+          </div>
+        </section>
+        <section v-if="redType==2" class="publishedResults">
+          <img style="max-width:100%;" src="/static/issueDig.png" alt>
+          <div class="close">
+            <img src="/static/close.png" alt @click="innerVisible=false">
+          </div>
+          <div class="button">
+            <img src="/static/issueButton.png" alt @click="redJump">
+          </div>
+        </section>
+        <section v-if="redType==3">
+          <img style="max-width:100%;" src="/static/okDig.png" alt>
+          <div class="close">
+            <img src="/static/close.png" alt @click="innerVisible=false">
+          </div>
+          <div class="button">
+            <img
+              src="/static/okButton.png"
+              alt
+              @click="innerVisible=false;dialogTableVisibleRed=false"
+            >
+          </div>
+        </section>
+      </el-dialog>
+    </el-dialog> -->
+    <!-- 红包领取结束-->
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!-- 积分 start -->
+    <!-- 悬浮窗 -->
+    <div class="integral_suspend"  v-if="dialogTableVisibleIntegral" @click="showIntegral">
+      <img src="/static/integral2/教师后台_悬浮框.png" alt="">
+    </div>
+    <!-- 弹窗 -->
+    <el-dialog
+        width="710px"
+        :visible.sync="dialogTableVisibleIntegral2"
+        append-to-body
+        :show-close="false"
+        :close-on-click-modal="false"
+        id="innerVisible"
+        top="6vh"
+        style="box-shadow: none;background: transparent;"
+    >
+      <section class="integralPop">
+        <img src="/static/integral2/弹窗.png" alt="">
+        <div class="closed">
+          <img src="/static/closeButton.png" alt @click="dialogTableVisibleIntegral2=false;dialogTableVisibleIntegral=true">
+        </div>
+        <div class="btn" @click="skip('rank');dialogTableVisibleIntegral2=false;dialogTableVisibleIntegral=true">
+            <img src="/static/integral2/弹窗-按钮.png" alt="">
+        </div>
+      </section>
+    </el-dialog>
+    <!-- 积分弹窗 end -->
+    
   </div>
 </template>
 
@@ -233,10 +372,17 @@ import {
   teacherAdmin,
   gradeClassAllGradeClass,
   bonusPointLogSignIn,
-  teacherUpdateGuideStep
+  teacherUpdateGuideStep,
+  SendWxRedPacketGetReceiveRedPacket, //滚动
+  SendWxRedPacketSendRedPacket,
+  ClickLogSave,
+  SendWxRedPacketGetPopupAd,
+  SendWxRedPacketSendRedPacketTime,
+  adGetPopupAd  //弹窗控制接口
 } from "@/api/api";
 //引入Vuex辅助计算属性
 import { mapState, mapActions } from "vuex";
+import util from "@/util/util.js"
 
 export default {
   data() {
@@ -249,6 +395,31 @@ export default {
       //控制文件是否上传成功状态
 
       fileType: true,
+
+      relatvieShow: false,
+      
+      //红包
+      way: true,
+      href: "",
+      href2: "",
+      imgUrl: "",
+      imgUrl2: "",
+      // 积分悬浮窗
+      dialogTableVisibleIntegral: false,
+      dialogTableVisibleIntegral2: false,
+      dialogTableVisible3: false,
+      // dialogTableVisible1: false,
+      // dialogTableVisible2: false,
+      innerVisible: false,
+      //红包滚动数据
+      redPacketList: [],
+
+      //红包活动页面显示控制
+      dialogTableVisibleRed: false,
+      dialogTableVisibleRed2: false,
+      //红包领取状态控制
+      redType: "4",
+      //红包结束
 
       //控制是否签到
       dialogTableVisible: false,
@@ -278,21 +449,126 @@ export default {
       }
     }
   },
-
   created() {
-    //登录签到
-    bonusPointLogSignIn().then(res => {
-      if (res.data.code == 200) {
-        if (res.data.data) {
-          this.integralObj = res.data.data;
-          console.log(this.integralObj);
-          this.dialogTableVisible = true;
-        } else {
-          // console.log('不可以签到')
+    //控制首次登入只出现一次图标
+    if (!this.getLocalStorage("relatvieShow")) {
+      this.relatvieShow = true;
+      this.saveLocalStorage("relatvieShow", true);
+    }
+    // 控制12小时出现一次积分弹出框
+    adGetPopupAd().then(res=> {
+      if(res.data.code == 200) {
+        var popObj = res.data.data.banner
+        // console.log('adGetPopupAd',res.data.data.banner)
+        // 任务尚未完成时12h弹出一次
+        if(popObj.taskFinish == false) {
+          if(popObj.url == "") {
+            this.dialogTableVisibleIntegral = false;
+            this.dialogTableVisibleIntegral2 = false;
+          }else{
+            // 活动有效期内
+            if (!this.isShowTime("showPop",popObj.displayType)) {
+              this.saveLocalStorage("showPop", Date.now());
+              this.dialogTableVisibleIntegral = false;
+              this.dialogTableVisibleIntegral2 = true;
+            }else{
+              this.dialogTableVisibleIntegral = true;
+              console.log("showPop","xiatan")
+            }
+          }
+        }else{
+          if(popObj.url == "") {
+            this.dialogTableVisibleIntegral = false;
+            this.dialogTableVisibleIntegral2 = false;
+          }else{
+            this.dialogTableVisibleIntegral = true;
+            this.dialogTableVisibleIntegral2 = false;
+          }
         }
-      } else {
+      }else{
+        this.dialogTableVisibleIntegral2 = false;
       }
-    });
+    })
+    /**********************************************************************************************************************/
+    // //控制发布成绩红包报名悬浮窗是否显示
+    // SendWxRedPacketSendRedPacketTime({
+    //   userType: 1
+    // }).then(res => {
+    //   if (res.data.code == 200) {
+    //     console.log("res1", res.data);
+    //     if (res.data.data.type == "1") {
+    //       this.imgUrl = res.data.data.imgUrl;
+    //       this.dialogTableVisibleRed = false; //
+    //       this.dialogTableVisibleRed2 = false; //youxia
+    //       this.dialogTableVisible2 = true;
+    //     } else if (res.data.data.type == "2") {
+    //       this.dialogTableVisible1 = false; //报名弹窗是否显示
+    //       this.dialogTableVisible2 = false;
+    //       //  this.dialogTableVisibleRed = false;
+    //       if (!this.isShow("signUp")) {
+    //         this.saveLocalStorage("signUp", Date.now());
+    //         this.dialogTableVisibleRed = true;
+    //       }
+    //       this.dialogTableVisibleRed2 = true;
+    //     } else {
+    //       this.dialogTableVisible1 = false;
+    //       this.dialogTableVisible2 = false;
+    //       this.dialogTableVisibleRed = false; //
+    //       this.dialogTableVisibleRed2 = false; //youxia
+    //     }
+    //   }
+    // });
+    //红包报名
+    //控制是否发布通知模态框24小时出现一次
+    //控制红包报名弹窗是否显示
+    // SendWxRedPacketGetPopupAd({
+    //   userType: 1
+    // }).then(res => {
+    //   if (res.data.code == 200) {
+    //     console.log("res", res.data);
+    //     if (res.data.data.id == "") {
+    //       this.dialogTableVisible1 = false;
+    //       this.imgUrl2 = res.data.data.imgUrl2;
+    //     } else {
+    //       if (!this.isShow("signUp")) {
+    //         this.saveLocalStorage("signUp", Date.now());
+    //         this.dialogTableVisible1 = true;
+    //       }
+    //     }
+    //   }
+    // });
+    // //红包领取
+    // if (!this.isShow("redUp")) {
+    //   this.saveLocalStorage("redUp", Date.now());
+    //   this.dialogTableVisibleRed = true;
+    // }
+
+    // //红包中奖滚动
+    // SendWxRedPacketGetReceiveRedPacket().then(res => {
+    //   this.redPacketList = res.data;
+    //   this.roll();
+    //   // }
+    // });
+
+    // //登录签到
+    // bonusPointLogSignIn().then(res => {
+    //   if (res.data.code == 200) {
+    //     if (res.data.data) {
+    //       const h = this.$createElement;
+    //       this.$notify({
+    //         title: "每天首次登录获得积分",
+    //         message: h(
+    //           "i",
+    //           { style: "color: teal" },
+    //           "恭喜获得" + res.data.data.receiveBonusPoint + "积分"
+    //         )
+    //       });
+    //     } else {
+    //       // console.log('不可以签到')
+    //     }
+    //   } else {
+    //   }
+    // });
 
     //获取所有的科目
     teacherList().then(res => {
@@ -356,6 +632,83 @@ export default {
   },
   methods: {
     ...mapActions(["setclassShow", "setheaderNav", "setleading_in"]),
+    // 积分弹窗
+    showIntegral() {
+      this.dialogTableVisibleIntegral = false;
+      this.dialogTableVisibleIntegral2 = true;
+    },
+    goRegister(){
+      this.$router.push({ name: "userInfo" });
+    },
+    //红包报名
+    // signUp() {
+    //   ClickLogSave({
+    //     statisticsType: 1,
+    //     statisticsId: this.getLocalStorage("login_userInfo").id,
+    //     source: 3
+    //   }).then(res => {
+    //     if (res.data.code == 200) {
+    //       console.log(res);
+
+    //       // window.open("http://dbqw0ng9pmd3cnjm.mikecrm.com/GcJmP3h", "_blank");
+    //     }
+    //   });
+    // },
+    // //红包领取事件
+    // RedEnvelopeCollection() {
+    //   SendWxRedPacketSendRedPacket().then(res => {
+    //     if (res.data.code == 200) {
+    //       console.log("res.data.data", res.data.data);
+    //       if (res.data.data.type == 4) {
+    //         const h = this.$createElement;
+    //         this.$notify({
+    //           title: "每天首次登录获得积分",
+    //           message: h(
+    //             "i",
+    //             { style: "color: teal" },
+    //             "红包领取异常！请联系咪师客服人员"
+    //           )
+    //         });
+    //       } else {
+    //         console.log("res.data.data", res.data.data.type);
+    //         this.innerVisible = true;
+    //         this.redType = res.data.data.type;
+    //         // console.log(res);
+    //       }
+    //     }
+    //   });
+    // },
+
+    // //红包小图标
+    // redRoll() {
+    //   this.dialogTableVisibleRed = true;
+    //   setTimeout(() => {
+    //     this.roll();
+    //   }, 1000);
+    // },
+    // //滚动事件
+    // roll() {
+    //   console.log(document.getElementById("rollContainerActivity"));
+
+    //   if (document.querySelector(".rollContainerActivity")) {
+    //     var index = 0;
+    //     var dom = document.querySelector(".rollContainerActivity");
+    //     setInterval(() => {
+    //       dom.style.top = "-" + index * 30 + "px";
+    //       if (index == this.redPacketList.length) {
+    //         index = 0;
+    //       }
+    //       index++;
+    //     }, 3000);
+    //   }
+    // },
+    // redJump() {
+    //   this.$router.push({
+    //     name: "schoolAchievement"
+    //   });
+    // },
+    //红包结束
+
     jump() {
       this.setheaderNav(1);
       this.setleading_in(3);
@@ -539,4 +892,5 @@ export default {
 </script>
 <style lang="scss">
 @import "../../assets/Scss/publicTemplate/Index.scss";
+
 </style>

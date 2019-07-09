@@ -29,6 +29,7 @@
         status-icon
         :show-message="true"
         :inline-message="true"
+        @keyup.enter.native="loginGo('form')"
         @submit.native.prevent
       >
         <el-form-item label="手机号" prop="mobile">
@@ -82,6 +83,7 @@
           <el-input v-model="form.pw2" type="password"></el-input>
         </el-form-item>
       </el-form>
+      
       <div class="login-go">
         <el-button
           @click="loginGo('form')"
@@ -104,8 +106,16 @@
       <div class="login-section" v-if="initlogin==2">
         <div>
           <el-checkbox v-model="checkedProtocol">我已阅读并同意</el-checkbox>
-          <a href="javascritp:" class="protocol">《咪师校园用户注册协议》</a>
-          <a href="javascritp:" class="protocol">《咪师 校园使用规则〉</a>
+          <a
+            href="http://mseenet.com/TeacherProtocol/protocolTwo.html"
+            target="_block"
+            class="protocol"
+          >《咪师校园用户注册协议》</a>
+          <a
+            href="http://mseenet.com/TeacherProtocol/protocolOne.html"
+            target="_block"
+            class="protocol"
+          >《咪师校园使用规则〉</a>
         </div>
       </div>
     </div>
@@ -165,11 +175,11 @@ export default {
       form: {}, //表单数据
       // checked: false, //记住我
       checkedProtocol: false, //服务协议
-      initlogin: 0, //登录跳转状态值（1登入，激活登入2,忘记密码3）
+      initlogin: "", //登录跳转状态值（1登入，激活登入2,忘记密码3）
       msgCode: 0, //控制是否已发送短信
       countDown: 60, //倒计时计数
-      codeSrc: "", //图形验证码
       disabled: false, //控制发送短信按钮是否可以再次点击
+      codeSrc: "", //图形验证码
       // disabled2: false,
 
       fixStyle: "",
@@ -242,6 +252,7 @@ export default {
                   console.log(res.data.data);
                   // this.$router.push('/')
                   this.saveAllLocalStorage(res.data.data, "login_userInfo", [
+                    "id",
                     "permissions",
                     "realName",
                     "schoolName",
@@ -301,6 +312,7 @@ export default {
                     console.log(res.data.data);
                     // this.$router.push('/')
                     this.saveAllLocalStorage(res.data.data, "login_userInfo", [
+                      "id",
                       "permissions",
                       "realName",
                       "schoolName",
@@ -309,7 +321,7 @@ export default {
                       "isHeadTeacher",
                       "mobile"
                     ]);
-                    // //存储token
+                    // 存储token
                     this.saveLocalStorage("token", res.data.data.token);
                     // window.localStorage.setItem('token', res.data.data.token)
                     this.$router.push({ name: "Home" });
@@ -403,6 +415,7 @@ export default {
     }
   },
   created() {
+    this.randomImg();
     //  window.onresize = () => {
     //     const windowWidth = document.body.clientWidth
     //     const windowHeight = document.body.clientHeight

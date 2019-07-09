@@ -5,16 +5,18 @@
   <meta charset="utf-8">
   <link rel="shortcut icon" type="image/x-icon" href="/static/Icon/favicon.ico">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <div style="display:none"><script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1275883714&web_id=1275883714"></script></div>
   <title>咪师教师平台</title>
 </head>
 
 <body>
-  <div id="app"></div>
+  
   <div id="context" class="context" style="width: 100%;
     height: 100%;
+    background: #ffffff;
     margin: -15px 0px -8px -10px;
     position: absolute;
-    z-index: 999;
+    z-index: 9999;
     display: none;">
     <div id="msg" class="msg" style="width: 100%;
         height: 100%;
@@ -29,25 +31,24 @@
           height:30px;
           margin:0 auto;
           margin-top: 83px;">
-        检测到您正在使用IE<span id="verSion"></span>浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览
+        检测到您正在使用IE<span id="verSion"></span>浏览器,请使用其它浏览器才可以进行浏览
         <p id="chrome" style="
             padding-top: 32px;
             width: 500px;
             margin: 0 auto;
           ">
           推荐使用<img style="vertical-align: middle;margin: 0 3px 6px;" src="/static/img/chrome.png" alt="">谷歌浏览器<a target="_blank"
-            href='https://pc.qq.com/detail/1/detail_2661.html'>点击下载</a>
+            href='https://www.google.cn/intl/zh-CN/chrome/'>点击下载</a>
         </p>
 
       </p>
     </div>
   </div>
   <!-- built files will be auto injected -->
+  <div id="app"></div>
 </body>
 <script>
-
-  //判断是否为IE/Safari
-
+  // 判断是否为IE/Safari
   var versions
   var userAgent = navigator.userAgent;  // 取得浏览器的 userAgent 字符串
   // console.log("userAgent",userAgent) //IE不认得console
@@ -56,7 +57,6 @@
   //判断是否为IE浏览器
   if ((userAgent.indexOf("compatible") != -1 && userAgent.indexOf("MSIE") != -1 && userAgent.indexOf("Opera") == -1) || userAgent.indexOf('Trident') != -1) {
     //alert("IE");
-
     //IE11 userAgent中，只有Trident
     if (userAgent.indexOf('Trident') != -1 && userAgent.indexOf("MSIE") == -1) {
       versions = userAgent.substr(userAgent.indexOf("rv:"), 7).split(".")[0].replace(/[^0-9]/ig, "")
@@ -65,26 +65,29 @@
     //IE8,9,10 userAgent中，既有MSIE也有Trident
     if (userAgent.indexOf('Trident') != -1 && userAgent.indexOf("MSIE") != -1) {
       versions = userAgent.substr(userAgent.indexOf("MSIE"), 8).split(".")[0].replace(/[^0-9]/ig, "")
-      //alert("检测到您正在使用IE"+versions+"浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览,推荐使用谷歌浏览器,以获得最佳体验")
+      // alert("检测到您正在使用IE"+versions+"浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览,推荐使用谷歌浏览器,以获得最佳体验")
     }
     //IE8以下 userAgent中，不含Trident
     if (userAgent.indexOf('Trident') == -1 && userAgent.indexOf("MSIE") != -1) {
       versions = userAgent.substr(userAgent.indexOf("MSIE"), 8).split(".")[0].replace(/[^0-9]/ig, "")
-      //alert("检测到您正在使用IE"+versions+"浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览,推荐使用谷歌浏览器,以获得最佳体验")
+      // alert("检测到您正在使用IE"+versions+"浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览,推荐使用谷歌浏览器,以获得最佳体验")
     }
     if (versions > 11 || versions == 11) {
-      alert("检测到您正在使用IE" + versions + "浏览器,推荐使用谷歌浏览器,以获得最佳体验")
-
+      // var context = document.getElementById('context')
+      // var text = document.getElementById('text')
+      // var app = document.getElementById('app')
+      // alert("检测到您正在使用IE"+versions+"浏览器,建议使用其它浏览器进行浏览,推荐使用谷歌浏览器,以获得最佳体验")
     } else {
       context.style.display = 'block'
-      // verSion.innerHTML = versions
-      text.innerHTML = "检测到您正在使用IE" + versions + "浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览"
+      app.style.display = 'none'
+      verSion.innerHTML = versions
+      text.innerHTML = "检测到您正在使用IE" + versions + "浏览器,请使用其它浏览器才可以进行浏览"
       // text.innerHTML = `检测到您正在使用IE<span id="verSion"></span>浏览器,请先升级到IE11或使用其它浏览器才可以进行浏览`
     }
   }
   //IE end
 
-  // //Safari
+  // Safari
   // if (userAgent.indexOf("Chrome") == -1 && userAgent.indexOf("Safari") != -1) {
   //   var context = document.getElementById('context')
   //   var text = document.getElementById('text')
@@ -94,7 +97,7 @@
   //   context.style.display = 'block'
   //   text.innerText = `检测到您正在使用Safari浏览器,推荐使用谷歌浏览器,以获得最佳体验`
   // }
-
+  /*Safari end*/ 
 </script>
 
 </html>

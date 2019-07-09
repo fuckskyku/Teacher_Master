@@ -71,6 +71,7 @@
             placeholder="选择日期"
             v-model="form.eaminationTime"
             value-format="yyyy-MM-dd"
+            :picker-options="pickerOptions"
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="考试成绩" class="tip-content">
@@ -169,7 +170,12 @@ export default {
       tableData: [],
       eaminationDelAllObj: [],
       fileFlag: false,
-      fileFlagErr: false
+      fileFlagErr: false,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now() - 8.64e6;
+        }
+      }
     };
   },
   computed: {

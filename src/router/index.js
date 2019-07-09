@@ -26,6 +26,7 @@ export default new Router({
       children: [
         //首页路由
         { path: '/index', name: "index", component: (resolve) => require(['@/components/IndexChildren/index'], resolve), meta: { title: "首页" } },
+        { path: '/rank', name: "rank", component: (resolve) => require(['@/components/publicTemplate/activePage/rank.vue'], resolve), meta: { title: "积分排行" } },
         { path: '/classList', name: "classList", component: (resolve) => require(['@/components/IndexChildren/classManagement/classList'], resolve), meta: { title: "班级管理" } },
         { path: '/appPubicationList', name: "approvalandpublication", component: (resolve) => require(['@/components/IndexChildren/classManagement/appPubicationList'], resolve), meta: { title: "审批与发布" } },
         { path: '/weather', name: 'weather', component: (resolve) => require(['@/components/IndexChildren/Picktry/weather'], resolve), meta: { title: "点我试试" } },

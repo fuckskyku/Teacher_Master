@@ -42,7 +42,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button type="text" class="look" @click="LookMe(scope.row)">查看</el-button>
-          <!-- <el-button class="examine" type="text" v-if="scope.row.approvalStatus==1" @click="examineMe(scope.row,scope.$index)">审核</el-button> -->
+          <!-- <el-button class="examine" type="text" v-if="scope.row.approvalStatus==1" @click="examineMe(scope.row,scope.$index)">审批</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -161,11 +161,11 @@ export default {
         }
       } else if (type == 'String') {
         if (val == '1') {
-          return '未审核'
+          return '未审批'
         } else if (val == 2) {
-          return '审核通过'
+          return '审批通过'
         } else if (val == 3) {
-          return '审核被拒'
+          return '审批被拒'
         } else if (val == 4) {
           return '已撤回'
         }

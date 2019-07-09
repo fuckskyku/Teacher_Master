@@ -98,7 +98,7 @@
         <template slot-scope="scope">
           <el-button type="text" @click="look(scope.row)" class="look">查看</el-button>
           <el-button type="text" @click="edit(scope.row)">编辑</el-button>
-          <el-button class="delete" type="text" @click="del(scope.row,scope.$index)">删除</el-button>
+          <!-- <el-button class="delete" type="text" @click="del(scope.row,scope.$index)">删除</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -122,7 +122,7 @@
           :disabled="!dialogButtonFlag"
         >
           <div class="studentInfo">
-            <el-form-item label="头像">
+            <el-form-item label="学生正脸照">
               <el-upload
                 class="avatar-uploader"
                 action="/api/storage/uploadSingleFile"
@@ -135,6 +135,7 @@
                 <img v-if="studentImg" :src="studentImg" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
+              <div style="margin-left:20px;color:#ccc;">正脸照将用于人脸识别</div>
             </el-form-item>
 
             <!-- <el-form-item label="活动名称">
@@ -177,8 +178,8 @@
               ></el-date-picker>
             </el-form-item>
 
-            <el-form-item label="身份证号码">
-              <el-input v-model="dynamicValidateForm.idCard" placeholder="请输入身份证号码"></el-input>
+            <el-form-item label="身份证/护照">
+              <el-input v-model="dynamicValidateForm.idCard" placeholder="请输入身份证或护照"></el-input>
             </el-form-item>
 
             <el-form-item label="学号" prop="studentNo">
@@ -230,11 +231,7 @@
                   <el-input v-model="parentDatas.realName" placeholder="请输入姓名"></el-input>
                 </el-form-item>
 
-                <el-form-item
-                  label
-                  :prop="'parentDatas.'+index+'.mobile'"
-                  :rules="{required: true, message: '手机号码不能为空', trigger: 'blur'}"
-                >
+                <el-form-item label :prop="'parentDatas.'+index+'.mobile'" :rules="Ismobile">
                   <el-input v-model="parentDatas.mobile" placeholder="请输入手机号码"></el-input>
                 </el-form-item>
 
@@ -296,10 +293,36 @@ import Vue from "vue";
 export default {
   inject: ["reload"],
   data() {
+    var verify = {
+      studentNo: (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error("请输入学号!"));
+        } else if (!value.match(/^[A-Za-z0-9]+$/)) {
+          return callback(new Error("请输入正确的学号!"));
+        } else {
+          callback();
+        }
+      },
+      mobile: (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error("请输入手机号码"));
+        } else if (
+          !value.match(
+            /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/
+          )
+        ) {
+          return callback(new Error("请输入正确的手机号码!"));
+        } else {
+          callback();
+        }
+      }
+    };
     //表单验证
     var verifyParents = [];
 
     return {
+      Ismobile: { validator: verify.mobile, trigger: "blur",required: true},
+
       studentImg: "",
 
       //url传参
@@ -355,7 +378,9 @@ export default {
           { required: true, message: "请输入学生姓名", trigger: "blur" }
         ],
         sex: [{ required: true, message: "请选择性别", trigger: "change" }],
-        studentNo: [{ required: true, message: "请输入学号", trigger: "blur" }]
+        studentNo: [
+          { required: true, validator: verify.studentNo, trigger: "blur" }
+        ]
       }
     };
   },
@@ -661,7 +686,6 @@ export default {
                 );
                 var obj = { ...this.dynamicValidateForm };
                 obj.parentDatas = JSON.stringify(obj.parentDatas);
-
                 if (this.flagType) {
                   studentAdd(obj).then(res => {
                     if (res.data.code == 200) {

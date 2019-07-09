@@ -4,13 +4,13 @@
       <div class="seach_left">
         <el-input placeholder="搜索标题、发布者(回车进行搜索)" suffix-icon="el-icon-search" v-model="keywordsVal" clearable @change="keyWordsInput">
         </el-input>
-        <!-- <div class="section">
+        <div class="section">
           <div class="section_title">审批状态：</div>
           <el-select v-model="examineTypeVal" placeholder="审批状态" @change="examineEvent" clearable>
             <el-option v-for="item in examineTypeObj" :key="item.dictCode" :label="item.dictName" :value="item.dictCode">
             </el-option>
           </el-select>
-        </div> -->
+        </div>
         <div class="section">
           <div class="section_title">发布类型：</div>
           <el-select v-model="noticeVal" placeholder="发布类型" @change="noticeEvent" clearable>
@@ -33,17 +33,17 @@
           <span style="margin-left: 10px">{{ new Date(scope.row.createTime).format('yyyy-MM-dd') }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column prop="approvalStatus" label="审批状态">
+      <el-table-column prop="approvalStatus" label="审批状态">
         <template slot-scope="scope">
           <span :style="{'color':checkAuditStatusType(scope.row.approvalStatus,'Color')}">{{ checkAuditStatusType(scope.row.approvalStatus,'String')}}</span>
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <!-- <el-button type="text" class="look" @click="LookMe(scope.row)">查看</el-button> -->
-          <!-- <el-button class="examine" type="text" v-if="scope.row.approvalStatus==1" @click="examineMe(scope.row,scope.$index)">审核</el-button> -->
-          <el-button type="text" class="look" @click="LookMe(scope.row)">查看</el-button>
-          <el-button class="examine" type="text"  @click="examineMe(scope.row,scope.$index)">审核</el-button>
+          <!-- <el-button class="examine" type="text" v-if="scope.row.approvalStatus==1" @click="examineMe(scope.row,scope.$index)">审批</el-button> -->
+          <el-button type="text" class="look"  @click="LookMe(scope.row)">查看</el-button>
+          <el-button class="examine" type="text" v-if="scope.row.approvalStatus==1"  @click="examineMe(scope.row,scope.$index)">审批</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -76,7 +76,7 @@
         </el-scrollbar>
       </div>
       <div class="operate">
-        <el-radio v-model="radio" label="1">审核通过</el-radio>
+        <el-radio v-model="radio" label="1">审批通过</el-radio>
         <el-radio v-model="radio" label="2">审批拒绝</el-radio>
       </div>
       <div class="button_group">
@@ -185,11 +185,11 @@ export default {
         }
       } else if (type == 'String') {
         if (val == '1') {
-          return '未审核'
+          return '未审批'
         } else if (val == 2) {
-          return '审核通过'
+          return '审批通过'
         } else if (val == 3) {
-          return '审核被拒'
+          return '审批被拒'
         } else if (val == 4) {
           return '已撤回'
         }

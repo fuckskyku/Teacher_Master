@@ -32,18 +32,14 @@
         <!-- <div>{{lookData}}</div> -->
       </div>
     </el-scrollbar>
-
+    
     <div slot="footer" v-if="lookData?lookData.auditStatus==2?true:false:false" style='padding-top: 20px;text-align:center'>
       <el-button @click="noticeAllShow=true">查看通知结果</el-button>
       <el-button @click="downloadFile">下载通知结果</el-button>
     </div>
-
     <NoticeTreeAll :isShow.sync='noticeAllShow' :id="lookData?lookData.id?lookData.id:null:null" :type='lookData?lookData.newsStyleType?lookData.newsStyleType:null:null' append-to-body></NoticeTreeAll>
-
   </el-dialog>
-
 </template>
-
 <script>
 import NoticeTreeAll from '../../publicTemplate/dialogList/dialogNoticeAll'
 import Vue from 'vue'

@@ -297,7 +297,7 @@ export default {
             // this.signatureImgSrc = res.data.data.signImg
             this.reasonsDetailText = res.data.data.reasonsDetail;
           } else {
-            console.log(res);       
+            console.log(res);
           }
         });
       }

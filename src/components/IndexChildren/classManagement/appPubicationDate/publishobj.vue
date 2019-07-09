@@ -129,7 +129,7 @@
     </el-tabs>
 
     <LookHomeWork :isShow.sync='dialogTableVisible' :lookData="LookMeObj"  @click.native="addEvenet($event)"></LookHomeWork>
-
+    
     <!-- 通知 -->
     <el-dialog :visible.sync="dialogTableVisibleone" :fullscreen="false" width="580px" top="30vh" :show-close=false>
       <div class="notice">

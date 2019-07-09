@@ -23,7 +23,7 @@
             <time>{{lookData?'发布时间：'+ new Date(lookData.createTime).format('yyyy-MM-dd hh:mm:ss'):''}}</time>
           </div>
           <div class="title_item">
-            <time>{{lookData?'审核时间：'+ new Date(lookData.createTime).format('yyyy-MM-dd hh:mm:ss'):''}}</time>
+            <time>{{lookData?lookData.auditTime?'审批时间：'+ new Date(lookData.auditTime).format('yyyy-MM-dd hh:mm:ss'):'':''}}</time>
           </div>
         </div>
         <div class="noticeName" v-if="false">
@@ -69,7 +69,7 @@ export default {
     closeDialog() {
       this.$emit("update:isShow", false);
     },
-    
+
     downloadFile() {
       axios({
         url: "/notifyDetail/exportData?infoId=" + this.lookData.id + "",

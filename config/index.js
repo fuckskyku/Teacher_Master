@@ -14,6 +14,7 @@ module.exports = {
       '/api': {
         // target: "http://192.168.3.11:8084/",
         target: "http://test.admin.teacher.ms.com:8095/",
+        // target: "http://192.168.3.21:8086/",
         // target: "http://test.admin.teacher.ms.com:9095/",
         // target: "http://test.admin.teacher.ms.com:8087/",
         // target: "http://192.168.3.11:8084/",

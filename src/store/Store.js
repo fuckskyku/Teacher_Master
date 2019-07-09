@@ -23,7 +23,7 @@ export default new Vuex.Store({
     AuthorityShow,
     crumbsList
   },
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({key:'TeacherState'})],
 })
 
 

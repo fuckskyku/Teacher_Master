@@ -95,6 +95,24 @@ export default {
       // }
     },
     dwonLOadStudentInformation(row) {
+      var versions
+      var userAgent = navigator.userAgent;  // 取得浏览器的 userAgent 字符串
+      /* 检测IE11 */ 
+      if ((userAgent.indexOf("compatible") != -1 && userAgent.indexOf("MSIE") != -1 && userAgent.indexOf("Opera") == -1) || userAgent.indexOf('Trident') != -1) {
+        this.$alert('检测到您正在使用IE11浏览器,无法进行下载,请使用其它浏览器下载,推荐使用谷歌浏览器,以获得最佳体验', '警告', {
+          confirmButtonText: '确定',
+        });
+      }
+      /* 检测是否edge浏览器 */ 
+      if (userAgent.indexOf("Edge") != -1 ) {
+        versions = userAgent.substr(userAgent.indexOf("Edge/"),7).split(".")[0].replace(/[^0-9]/ig, "");
+        
+        if(versions > 17 || versions == 17){
+          this.$alert('检测到您正在使用Edge浏览器,无法进行下载,请使用其它浏览器下载,推荐使用谷歌浏览器,以获得最佳体验', '警告', {
+            confirmButtonText: '确定',
+          });
+        }
+      }
       axios({
         url: "/student/exportStudentScoreTemp?classId=" + row.id,
         method: "get",

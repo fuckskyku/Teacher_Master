@@ -4,12 +4,27 @@
       <el-tab-pane label="已发布" name="issued">
         <div class="seach">
           <div class="seach_left">
-            <el-input placeholder="搜索标题、发布者(回车进行搜索)" suffix-icon="el-icon-search" @change="keyWordsInput($event,2)" v-model="keywordsVal"></el-input>
+            <el-input
+              placeholder="搜索标题、发布者(回车进行搜索)"
+              suffix-icon="el-icon-search"
+              @change="keyWordsInput($event,2)"
+              v-model="keywordsVal"
+            ></el-input>
 
             <div class="section">
               <div class="section_title">筛选：</div>
-              <el-select v-model="examineTypeVal" placeholder="审核状态" @change="examineEvent($event,2)" clearable>
-                <el-option v-for="item in examineTypeObj" :key="item.dictCode" :label="item.dictName" :value="item.dictCode"></el-option>
+              <el-select
+                v-model="examineTypeVal"
+                placeholder="审批状态"
+                @change="examineEvent($event,2)"
+                clearable
+              >
+                <el-option
+                  v-for="item in examineTypeObj"
+                  :key="item.dictCode"
+                  :label="item.dictName"
+                  :value="item.dictCode"
+                ></el-option>
               </el-select>
             </div>
           </div>
@@ -20,7 +35,15 @@
         </div>
 
         <!-- 表格 -->
-        <el-table :data="tableData.data" style="width: 100%" height="550" @select="checkbox" @select-all="checkboxAll" :header-cell-style="{textAlign:'center'}" :cell-style="{textAlign:'center',color:'#606266',padding:'4px 0'}">
+        <el-table
+          :data="tableData.data"
+          style="width: 100%"
+          height="550"
+          @select="checkbox"
+          @select-all="checkboxAll"
+          :header-cell-style="{textAlign:'center'}"
+          :cell-style="{textAlign:'center',color:'#606266',padding:'4px 0'}"
+        >
           <el-table-column type="selection"></el-table-column>
           <!-- <el-table-column type="index" label="序号"></el-table-column> -->
           <el-table-column prop="newsStyleTypeStr" label="类型"></el-table-column>
@@ -29,18 +52,24 @@
           <el-table-column prop="createTime" label="发布时间" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
-              <span style="margin-left: 10px">{{ new Date(scope.row.createTime).format('yyyy-MM-dd hh:mm:ss') }}</span>
+              <span
+                style="margin-left: 10px"
+              >{{ new Date(scope.row.createTime).format('yyyy-MM-dd hh:mm:ss') }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="auditTime" label="审核时间" :show-overflow-tooltip="true">
+          <el-table-column prop="auditTime" label="审批时间" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <i class="el-icon-time" v-if="scope.row.auditTime"></i>
-              <span style="margin-left: 10px">{{ scope.row.auditTime?new Date(scope.row.auditTime).format('yyyy-MM-dd hh:mm:ss'):'无' }}</span>
+              <span
+                style="margin-left: 10px"
+              >{{ scope.row.auditTime?new Date(scope.row.auditTime).format('yyyy-MM-dd hh:mm:ss'):'无' }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="auditStatus" label="审核状态">
+          <el-table-column prop="auditStatus" label="审批状态">
             <template slot-scope="scope">
-              <span :style="{'color':checkAuditStatusType(scope.row.auditStatus,'Color')}">{{ checkAuditStatusType(scope.row.auditStatus,'String')}}</span>
+              <span
+                :style="{'color':checkAuditStatusType(scope.row.auditStatus,'Color')}"
+              >{{ checkAuditStatusType(scope.row.auditStatus,'String')}}</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -50,17 +79,38 @@
             </template>
           </el-table-column>
         </el-table>
-        <pageHtml :tabObj.sync='tableData' name="schoolNewsPage" :type="examineTypeVal" :searchsKey='keywordsVal'></pageHtml>
+        <pageHtml
+          :tabObj.sync="tableData"
+          name="schoolNewsPage"
+          :type="examineTypeVal"
+          :searchsKey="keywordsVal"
+        ></pageHtml>
       </el-tab-pane>
 
       <el-tab-pane label="草稿箱" name="rough">
         <div class="seach">
           <div class="seach_left">
-            <el-input placeholder="搜索标题、发布者(回车进行搜索)" suffix-icon="el-icon-search" clearable @change="keyWordsInput($event,1)" v-model="keywordsRoughVal"></el-input>
+            <el-input
+              placeholder="搜索标题、发布者(回车进行搜索)"
+              suffix-icon="el-icon-search"
+              clearable
+              @change="keyWordsInput($event,1)"
+              v-model="keywordsRoughVal"
+            ></el-input>
             <div class="section">
               <div class="section_title">筛选：</div>
-              <el-select v-model="noticeVal" placeholder="通知类型" @change="noticeEvent($event,1)" clearable>
-                <el-option v-for="item in noticeObj" :key="item.dictCode" :label="item.dictName" :value="item.dictCode"></el-option>
+              <el-select
+                v-model="noticeVal"
+                placeholder="请选择类型"
+                @change="noticeEvent($event,1)"
+                clearable
+              >
+                <el-option
+                  v-for="item in noticeObj"
+                  :key="item.dictCode"
+                  :label="item.dictName"
+                  :value="item.dictCode"
+                ></el-option>
               </el-select>
             </div>
           </div>
@@ -70,7 +120,15 @@
           </div>
         </div>
         <!-- 表格 -->
-        <el-table :data="roughList.data" style="width: 100%" height="550" @select="checkbox" @select-all="checkboxAll" :header-cell-style="{textAlign:'center'}" :cell-style="{textAlign:'center',color:'#606266',padding:'4px 0'}">
+        <el-table
+          :data="roughList.data"
+          style="width: 100%"
+          height="550"
+          @select="checkbox"
+          @select-all="checkboxAll"
+          :header-cell-style="{textAlign:'center'}"
+          :cell-style="{textAlign:'center',color:'#606266',padding:'4px 0'}"
+        >
           <el-table-column type="selection"></el-table-column>
           <!-- <el-table-column type="index" label="序号"></el-table-column> -->
           <el-table-column prop="newsStyleTypeStr" label="类型"></el-table-column>
@@ -79,7 +137,9 @@
           <el-table-column prop="createTime" label="起稿时间">
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
-              <span style="margin-left: 10px">{{ new Date(scope.row.createTime).format('yyyy-MM-dd hh:mm:ss') }}</span>
+              <span
+                style="margin-left: 10px"
+              >{{ new Date(scope.row.createTime).format('yyyy-MM-dd hh:mm:ss') }}</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -89,7 +149,12 @@
             </template>
           </el-table-column>
         </el-table>
-        <pageHtml :tabObj.sync='roughList' name="schoolNewsPage" :type="noticeVal" :searchsKey='keywordsRoughVal'></pageHtml>
+        <pageHtml
+          :tabObj.sync="roughList"
+          name="schoolNewsPage"
+          :type="noticeVal"
+          :searchsKey="keywordsRoughVal"
+        ></pageHtml>
       </el-tab-pane>
     </el-tabs>
 
@@ -113,20 +178,28 @@
           <img src="/static/Looktext.png" alt="">
         </div>
       </div>
-    </el-dialog> -->
-    <StyleLook :isShow.sync="lookType" :lookData='lookMeObj'></StyleLook>
+    </el-dialog>-->
+    <StyleLook :isShow.sync="lookType" :lookData="lookMeObj"></StyleLook>
     <!-- 通知 -->
-    <el-dialog :visible.sync="dialogTableVisibleone" :fullscreen="false" width="580px" top="30vh" :show-close=false>
+    <el-dialog
+      :visible.sync="dialogTableVisibleone"
+      :fullscreen="false"
+      width="580px"
+      top="30vh"
+      :show-close="false"
+    >
       <div class="notice">
         <div>
-          <img src="/static/insetImg/插画/流程步骤/发布风采.png" alt="">
+          <img src="/static/insetImg/插画/流程步骤/发布风采.png" alt>
         </div>
         <div class="text">
-          <div>
-            是否马上发布校园新闻风采
-          </div>
+          <div>是否马上发布校园新闻风采</div>
           <div style="font-size:16px;margin-top:10px">
-            <img src="/static/insetImg/插画/流程步骤/发布作业/integral.png" alt="" style="vertical-align:middle;">
+            <img
+              src="/static/insetImg/插画/流程步骤/发布作业/integral.png"
+              alt
+              style="vertical-align:middle;"
+            >
             发布校园新闻风采得积分换话费
           </div>
         </div>
@@ -140,10 +213,10 @@
 </template>
 
 <script>
-import { schoolNewsPage, commonDictList, schoolNewsDelete } from '@/api/api'
-import StyleLook from '../../../publicTemplate/dialogList/dialogStyleNoticeLook'
+import { schoolNewsPage, commonDictList, schoolNewsDelete } from "@/api/api";
+import StyleLook from "../../../publicTemplate/dialogList/dialogStyleNoticeLook";
 export default {
-  inject: ['reload'],
+  inject: ["reload"],
   data() {
     return {
       lookType: false,
@@ -151,24 +224,24 @@ export default {
       dialogTableVisibleone: false,
       time: 1530607644000,
       checked: [],
-      activeName: 'issued',
+      activeName: "issued",
       formInline: {},
 
       //关键字
-      keywordsVal: '',
-      keywordsRoughVal: '',
+      keywordsVal: "",
+      keywordsRoughVal: "",
       //搜索选择区域的数据
       noticeObj: [],
-      noticeVal: '',
+      noticeVal: "",
       examineTypeObj: [],
-      examineTypeVal: '',
+      examineTypeVal: "",
 
       temporaryDelAllObj: [],
       //表格数据
       tableData: [],
       //草稿箱表格数据
       roughList: []
-    }
+    };
   },
 
   created() {
@@ -177,63 +250,63 @@ export default {
       editStatus: 2
     }).then(res => {
       if (res.data.code == 200) {
-        console.log(res.data.data)
-        this.tableData = res.data.data
+        console.log(res.data.data);
+        this.tableData = res.data.data;
       }
-    })
-    
+    });
+
     //数据筛选
-    commonDictList({ dataTypeCodes: 'audit_status,notify_type' }).then(res => {
+    commonDictList({ dataTypeCodes: "audit_status,news_type" }).then(res => {
       if (res.data.code == 200) {
-        console.log(res.data.data)
-        this.examineTypeObj = res.data.data.audit_status
-        this.noticeObj = res.data.data.notify_type
+        console.log(res.data.data);
+        this.examineTypeObj = res.data.data.audit_status;
+        this.noticeObj = res.data.data.news_type;
       }
-    })
+    });
 
     //控制是否发布通知模态框24小时出现一次
-    if (!this.isShow('isShowStyleNotice')) {
-      this.saveLocalStorage('isShowStyleNotice', Date.now())
-      this.dialogTableVisibleone = true
+    if (!this.isShow("isShowStyleNotice")) {
+      this.saveLocalStorage("isShowStyleNotice", Date.now());
+      this.dialogTableVisibleone = true;
     }
   },
   methods: {
     //表格审批值颜色过滤//表格审批状态值过滤
     checkAuditStatusType(val, type) {
-      if (type == 'Color') {
-        if (val == '1') {
-          return '#F5A623'
+      if (type == "Color") {
+        if (val == "1") {
+          return "#F5A623";
         } else if (val == 2) {
-          return '#67C23A'
+          return "#67C23A";
         } else if (val == 3) {
-          return '#F56C6C'
+          return "#F56C6C";
         } else if (val == 4) {
-          return '#4A90E2'
+          return "#4A90E2";
         }
-      } else if (type == 'String') {
-        if (val == '1') {
-          return '未审核'
+      } else if (type == "String") {
+        if (val == "1") {
+          return "未审批";
         } else if (val == 2) {
-          return '审核通过'
+          return "审批通过";
         } else if (val == 3) {
-          return '审核被拒'
+          return "审批被拒";
         } else if (val == 4) {
-          return '已撤回'
+          return "已撤回";
         }
       }
     },
 
     //马上发布通知
     ReleaseSoon() {
-      this.$router.push({ path: '/issuestylenotice' })
+      this.$router.push({ path: "/issuestylenotice" });
     },
 
     //关键字模糊过滤
     keyWordsInput(val, type) {
       if (type == 1) {
-        this.keywordsRoughVal = val
+        this.keywordsRoughVal = val;
       } else if (type == 2) {
-        this.keywordsVal = val
+        this.keywordsVal = val;
       }
       schoolNewsPage({
         newsStyleType:
@@ -242,109 +315,109 @@ export default {
               ? this.noticeVal
               : null
             : this.noticeRoughVal
-              ? this.noticeRoughVal
-              : null,
+            ? this.noticeRoughVal
+            : null,
         searchWord: val,
         editStatus: type
       }).then(res => {
         if (res.data.code == 200) {
           if (type == 1) {
-            this.roughList = res.data.data
+            this.roughList = res.data.data;
           } else {
-            this.tableData = res.data.data
+            this.tableData = res.data.data;
           }
-          console.log(res.data.data)
+          console.log(res.data.data);
         }
-      })
+      });
     },
     //审批筛选过滤
     examineEvent(val, type) {
       if (type == 1) {
-        this.examineTypeRoughVal = val
+        this.examineTypeRoughVal = val;
       } else if (type == 2) {
-        this.examineTypeVal = val
+        this.examineTypeVal = val;
       }
       schoolNewsPage({
         auditStatus: val,
         searchWord:
           type == 2
-            ? this.keywordsVal && this.keywordsVal != ''
+            ? this.keywordsVal && this.keywordsVal != ""
               ? this.keywordsVal
               : null
-            : this.keywordsRoughVal && this.keywordsRoughVal != ''
-              ? this.keywordsRoughVal
-              : null,
+            : this.keywordsRoughVal && this.keywordsRoughVal != ""
+            ? this.keywordsRoughVal
+            : null,
         editStatus: type
       }).then(res => {
         if (res.data.code == 200) {
           if (type == 1) {
-            this.roughList = res.data.data
+            this.roughList = res.data.data;
           } else {
-            this.tableData = res.data.data
+            this.tableData = res.data.data;
           }
-          console.log(res.data.data)
+          console.log(res.data.data);
         }
-      })
+      });
     },
 
     noticeEvent(val, type) {
       if (type == 1) {
-        this.noticeRoughVal = val
+        this.noticeRoughVal = val;
       } else if (type == 2) {
-        this.noticeVal = val
+        this.noticeVal = val;
       }
       schoolNewsPage({
         searchWord:
           type == 2
-            ? this.keywordsVal && this.keywordsVal != ''
+            ? this.keywordsVal && this.keywordsVal != ""
               ? this.keywordsVal
               : null
-            : this.keywordsRoughVal && this.keywordsRoughVal != ''
-              ? this.keywordsRoughVal
-              : null,
+            : this.keywordsRoughVal && this.keywordsRoughVal != ""
+            ? this.keywordsRoughVal
+            : null,
         newsStyleType: val,
         editStatus: type
       }).then(res => {
         if (res.data.code == 200) {
           if (type == 1) {
-            this.roughList = res.data.data
+            this.roughList = res.data.data;
           } else {
-            this.tableData = res.data.data
+            this.tableData = res.data.data;
           }
-          console.log(res.data.data)
+          console.log(res.data.data);
         }
-      })
+      });
     },
 
     handleClick(tab, event) {
-      if (tab.label == '草稿箱') {
+      if (tab.label == "草稿箱") {
         //草稿表格数据
         schoolNewsPage({
           editStatus: 1
         }).then(res => {
           if (res.data.code == 200) {
-            this.roughList = res.data.data
-            console.log(res.data.data)
+            this.roughList = res.data.data;
+            console.log(res.data.data);
           }
-        })
+        });
       } else {
         //表格数据
         schoolNewsPage({
           editStatus: 2
         }).then(res => {
           if (res.data.code == 200) {
-            this.tableData = res.data.data
-            console.log(res.data.data)
+            this.tableData = res.data.data;
+            console.log(res.data.data);
           }
-        })
+        });
       }
     },
 
     del(row, index) {
-      this.$confirm('是否确定删除该条风采?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否确定删除该条风采?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           schoolNewsDelete({
@@ -352,108 +425,108 @@ export default {
           }).then(res => {
             if (res.data.code == 200) {
               this.$message({
-                type: 'success',
-                message: '删除成功!'
-              })
-              this.reload()
+                type: "success",
+                message: "删除成功!"
+              });
+              this.reload();
               // this.tableData.data.splice(index, 1)
             } else {
               this.$message({
-                type: 'success',
+                type: "success",
                 message: res.data.message
-              })
+              });
             }
-          })
+          });
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     //批量删除
     batchDel() {
       if (this.temporaryDelAllObj.length != 0) {
-        this.$confirm('是否确定删除已选风采?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
+        this.$confirm("是否确定删除已选风采?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
         })
           .then(() => {
             // console.log(this.temporaryDelAllObj)
-            let delList = []
+            let delList = [];
             this.temporaryDelAllObj.forEach(item => {
-              delList.push(item.id)
-            })
+              delList.push(item.id);
+            });
             schoolNewsDelete({ ids: delList.toString() }).then(res => {
               if (res.data.code == 200) {
                 this.$message({
-                  type: 'success',
-                  message: '删除成功!'
-                })
-                this.temporaryDelAllObj = []
-                this.reload()
+                  type: "success",
+                  message: "删除成功!"
+                });
+                this.temporaryDelAllObj = [];
+                this.reload();
               } else {
                 this.$message({
-                  type: 'success',
+                  type: "success",
                   message: res.data.message
-                })
+                });
               }
               // console.log(res)
-            })
+            });
           })
           .catch(() => {
             this.$message({
-              type: 'info',
-              message: '已取消删除'
-            })
-          })
+              type: "info",
+              message: "已取消删除"
+            });
+          });
       } else {
         this.$message({
-          type: 'warning',
-          message: '请先选择至少一项'
-        })
+          type: "warning",
+          message: "请先选择至少一项"
+        });
       }
     },
     //表格选中方法
     checkbox(selection, row) {
-      console.log(selection, row)
-      this.temporaryDelAllObj = selection
+      console.log(selection, row);
+      this.temporaryDelAllObj = selection;
     },
 
     //表格全选方法
     checkboxAll(selection) {
-      console.log(selection)
-      this.temporaryDelAllObj = selection
+      console.log(selection);
+      this.temporaryDelAllObj = selection;
     },
 
     LookMe(row) {
-      console.log(row)
-      this.lookType = true
-      this.lookMeObj = row
+      console.log(row);
+      this.lookType = true;
+      this.lookMeObj = row;
     },
 
     edit(row) {
-      console.log(row)
+      console.log(row);
       this.$router.push({
-        name: 'issuestylenotice',
+        name: "issuestylenotice",
         query: { id: row.id }
-      })
+      });
     },
     issuer() {
-      this.$router.push({ name: 'issuestylenotice' })
+      this.$router.push({ name: "issuestylenotice" });
     }
   },
   filters: {
     date(value) {
-      return new Date(value).format('yyyy-M-d h:m:s')
+      return new Date(value).format("yyyy-M-d h:m:s");
     }
   },
   components: {
     StyleLook
   }
-}
+};
 </script>
 
 <style lang="scss">

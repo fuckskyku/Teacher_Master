@@ -4,8 +4,8 @@
  * File Created: Monday, 5th November 2018 5:53:30 pm
  * Author: LGH (you@you.you)
  * -----
- * Last Modified: Thursday, 22nd November 2018 10:39:01 am
- * Modified By: LGH (you@you.you>)
+ * Last Modified: Saturday, 12th January 2019 2:12:55 pm
+ * Modified By: LGH (1415684247@QQ.COM>)
  * -----
  * Copyright 2017 - 2018 Your Company, Your Company
  * 成绩分科管理
@@ -37,9 +37,9 @@
       <el-table-column prop="higScore" label="最高分"></el-table-column>
       <el-table-column prop="lowScore" label="最低分"></el-table-column>
       <el-table-column prop="averageScore" label="平均分"></el-table-column>
-      <el-table-column prop="standardDeviation" label="标准差"></el-table-column>
-      <el-table-column prop="passRate" label="及格率(60%)" width="120"></el-table-column>
-      <el-table-column prop="goodRate" label="优良率(80%)" width="120"> </el-table-column>
+      <!-- <el-table-column prop="standardDeviation" label="标准差"></el-table-column> -->
+      <!-- <el-table-column prop="passRate" label="及格率(60%)" width="120"></el-table-column> -->
+      <!-- <el-table-column prop="goodRate" label="优良率(80%)" width="120"> </el-table-column> -->
       <el-table-column prop="isSend" label="是否已发给家长" width="120">
         <template slot-scope="scope">
           <span>{{scope.row.isSend?'是':'否'}}</span>

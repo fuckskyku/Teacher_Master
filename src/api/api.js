@@ -1,6 +1,10 @@
 import req from './apiSetting'
 
 
+
+//检查是否可以签到
+export const SingInIsSign  = param =>{return req.post('/singIn/isSign',param)}
+
 //数据字典
 export const commonDictList = param => { return req.post('/commonDict/list', param) }
 
@@ -158,7 +162,6 @@ export const approvalAudit = param => { return req.post('/approval/auditStatus',
 //继续审批
 export const approvalGetOneApproval = param => { return req.post('/approval/getOneApproval', param) }
 
-
 //抄送我的列表
 export const schoolNewsCopyList = param => { return req.post('/schoolNews/copyList', param) }
 //抄送我的是否有未读
@@ -167,6 +170,8 @@ export const schoolNewsNoReadCopyList = param => { return req.post('/schoolNews/
 export const schoolNewsNoReadCopyInfo = param => { return req.post('/schoolNews/noReadCopyInfo', param) }
 //抄送我的阅读状态更改该
 export const schoolNewsChangeCopyRead = param => { return req.post('/schoolNews/changeCopyRead', param) }
+//是否发送成绩
+export const SendScoreCheckSendScore = param => {return req.post('/SendScore/checkSendScore',param)}
 
 
 //发布作业列表
@@ -296,6 +301,8 @@ export const classStudentScoreStatisGetEvaluateContent = param => { return req.p
 export const departmentNotifyDepartmentUsers = param =>{return req.post('/department/notifyDepartmentUsers',param)}
 //家长的
 export const notifyDetailNotifyUser = param =>{return req.post('/notifyDetail/notifyUser',param)}
+//家长信息
+export const ParentForm = param=>{return req.get('/parent/form',param)}
 //查看会签图片
 export const notifyDetailGetSingDetail = param =>{return req.post('/notifyDetail/getSingDetail',param)}
 
@@ -326,3 +333,25 @@ export const classStudentSubjectScoreGetEvaluateContent = param => { return req.
 
 //意见反馈
 export const FeebackSave = param => {return req.post('/feeback/save',param)}
+
+
+//红包滚动
+export const SendWxRedPacketGetReceiveRedPacket = param =>{return req.post('/sendWxRedPacket/getReceiveRedPacket',param)}
+
+//红包操作统计
+export const ClickLogSave = param =>{return req.post('/clickLog/save ',param)}
+
+//点击红包领取
+export const SendWxRedPacketSendRedPacket = param =>{return req.post('/sendWxRedPacket/sendRedPacket',param)}
+
+//弹窗广告
+export const SendWxRedPacketGetPopupAd = param =>{return req.post('/sendWxRedPacket/getPopupAd',param)}
+
+//悬浮窗广告    
+export const SendWxRedPacketSendRedPacketTime = param =>{return req.post('/sendWxRedPacket/sendRedPacketTime',param)}
+
+//5月教师积分活动
+export const activityBonusGetBonusRanking = param =>{return req.post('/activityBonus/getBonusRanking',param)}
+
+//弹窗控制接口
+export const adGetPopupAd = param =>{return req.post('/ad/getPopupAd',param)}

@@ -3,11 +3,11 @@
     <div class="seach">
       <div></div>
       <div class="seach_right">
-        <el-button icon="el-icon-download" class="seach_yellow" round>
+        <!-- <el-button icon="el-icon-download" class="seach_yellow" round> -->
           <!-- 下载模板 -->
-          <a href="/static/template/学生成绩导入模板.xls" download style="color:black">下载模板</a>
+          <!-- <a href="/static/template/学生成绩导入模板.xls" download style="color:black">下载模板</a> -->
           <!-- <a href="https://baidu.com/">下载模板</a> -->
-        </el-button>
+        <!-- </el-button> -->
         <el-button icon="el-icon-plus" class="seach_yellow" round @click="AddTestScores">添加考试成绩</el-button>
       </div>
     </div>
@@ -17,7 +17,7 @@
       height="600"
       :header-cell-style="{textAlign:'center'}"
       :cell-style="{textAlign:'center',color:'#606266',padding:'4px 0'}"
-    >
+    > 
       <!-- <el-table-column type="index" label="序号"></el-table-column> -->
       <el-table-column prop="schoolName" label="所属分布（校区）"></el-table-column>
       <el-table-column prop="className" label="年级班级"></el-table-column>
@@ -56,7 +56,7 @@
     <div class="count" style="text-align:right;margin-top:10px;">学生总数：{{count}}</div>
     <pageHtml :tabObj.sync="tableData" name="teacherTeacherScoreList"></pageHtml>
     <!-- 主科设置 -->
-    <el-dialog :visible.sync="dialogVisible" top="30vh" width="50%">
+    <el-dialog :visible.sync="dialogVisible" top="30vh" width="50%" :close-on-click-modal="false">
       <div slot="title" style="text-align:center;">
         <p
           style="font-size: 24px; color: #222;padding: 15px 0;"
@@ -206,6 +206,24 @@ export default {
       });
     },
     dwonLOadStudentInformation(row) {
+      var versions
+      var userAgent = navigator.userAgent;  // 取得浏览器的 userAgent 字符串
+      /* 检测IE11 */ 
+      if ((userAgent.indexOf("compatible") != -1 && userAgent.indexOf("MSIE") != -1 && userAgent.indexOf("Opera") == -1) || userAgent.indexOf('Trident') != -1) {
+        this.$alert('检测到您正在使用IE11浏览器,无法进行下载,请使用其它浏览器下载,推荐使用谷歌浏览器,以获得最佳体验', '警告', {
+          confirmButtonText: '确定',
+        });
+      }
+      /* 检测是否edge浏览器 */ 
+      if (userAgent.indexOf("Edge") != -1 ) {
+        versions = userAgent.substr(userAgent.indexOf("Edge/"),7).split(".")[0].replace(/[^0-9]/ig, "");
+        
+        if(versions > 17 || versions == 17){
+          this.$alert('检测到您正在使用Edge浏览器,无法进行下载,请使用其它浏览器下载,推荐使用谷歌浏览器,以获得最佳体验', '警告', {
+            confirmButtonText: '确定',
+          });
+        }
+      }
       axios({
         url: "/student/exportStudentScoreTemp?classId=" + row.id,
         method: "get",

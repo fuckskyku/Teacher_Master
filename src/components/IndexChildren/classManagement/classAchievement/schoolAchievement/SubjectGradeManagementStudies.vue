@@ -41,9 +41,9 @@
       :cell-style="{textAlign:'center',color:'#606266'}"
     >
       <!-- <el-table-column type="index" label="序号"></el-table-column> -->
-      <el-table-column prop="term" label="学期" width="100"></el-table-column>
-      <el-table-column prop="gradeClassName" label="年级班级" width="100"></el-table-column>
-      <el-table-column prop="examType" label="考试类型" width="150"></el-table-column>
+      <el-table-column prop="term" label="学期" width="80"></el-table-column>
+      <el-table-column prop="gradeClassName" label="年级班级" width="80"></el-table-column>
+      <el-table-column prop="examType" label="考试类型" width="100"></el-table-column>
       <el-table-column prop="subjectName" label="科目"></el-table-column>
       <el-table-column prop="examTime" label="考试时间" width="100">
         <template slot-scope="scope">
@@ -55,9 +55,9 @@
       <el-table-column prop="higScore" label="最高分"></el-table-column>
       <el-table-column prop="lowScore" label="总分最低分" width="90"></el-table-column>
       <el-table-column prop="averageScore" label="平均分(不包括缺考人员)" width="190"></el-table-column>
-      <el-table-column prop="standardDeviation" label="标准差(不包括缺考人员)" width="190"></el-table-column>
-      <el-table-column prop="passRate" label="及格率(60%)" width="100"></el-table-column>
-      <el-table-column prop="goodRate" label="优良率(80%)" width="100"></el-table-column>
+      <!-- <el-table-column prop="standardDeviation" label="标准差(不包括缺考人员)" width="190"></el-table-column> -->
+      <!-- <el-table-column prop="passRate" label="及格率(60%)" width="100"></el-table-column> -->
+      <!-- <el-table-column prop="goodRate" label="优良率(80%)" width="100"></el-table-column> -->
       <el-table-column prop="isSend" label="是否已发送家长" width="120">
         <template slot-scope="scope">
           <span>{{scope.row.isSend?'是':'否'}}</span>
@@ -85,28 +85,28 @@ import {
   schoolTermSchoolTermList,
   examTypeExamTypeList,
   classStudentSubjectScoreSubjectScoreDelete
-} from '@/api/api'
-import { mapState } from 'vuex'
+} from "@/api/api";
+import { mapState } from "vuex";
 
 export default {
-  inject: ['reload'],
-  data () {
+  inject: ["reload"],
+  data() {
     return {
-      keywordsVal: '',
-      schoolTerm: '',
+      keywordsVal: "",
+      schoolTerm: "",
       schoolTermObj: [],
-      eaminationType: '',
+      eaminationType: "",
       eaminationTypeObj: [],
       queryObj: this.$route.query,
       tableData: []
-    }
+    };
   },
 
   methods: {
-    exminationInfo (row) {
-      console.log(row)
+    exminationInfo(row) {
+      console.log(row);
       this.$router.push({
-        name: 'StudentMarkListInfo',
+        name: "StudentMarkListInfo",
         query: {
           classId: row.classId,
           term: row.term,
@@ -114,13 +114,13 @@ export default {
           subjectId: row.subjectId,
           gradeId: row.gradeId
         }
-      })
+      });
     },
 
-    countLookMe (row) {
-      console.log(row)
+    countLookMe(row) {
+      console.log(row);
       this.$router.push({
-        name: 'OtSubjectScoreAnalysis',
+        name: "OtSubjectScoreAnalysis",
         query: {
           term: row.term,
           examType: row.examType,
@@ -128,44 +128,46 @@ export default {
           subjectId: row.subjectId,
           subjectName: row.subjectName
         }
-      })
+      });
     },
 
-    del (index, row) {
-      let _this = this
-      this.$confirm('是否确定删除该条成绩记录?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+    del(index, row) {
+      let _this = this;
+      this.$confirm("是否确定删除该条成绩记录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
-          classStudentSubjectScoreSubjectScoreDelete({ id: row.id }).then(res => {
-            if (res.data.code == 200) {
-              this.$message({
-                type: 'success',
-                message: '删除成功!'
-              })
-              this.reload()
-            } else {
-              this.$message({
-                type: 'success',
-                message: res.data.message
-              })
+          classStudentSubjectScoreSubjectScoreDelete({ id: row.id }).then(
+            res => {
+              if (res.data.code == 200) {
+                this.$message({
+                  type: "success",
+                  message: "删除成功!"
+                });
+                this.reload();
+              } else {
+                this.$message({
+                  type: "success",
+                  message: res.data.message
+                });
+              }
             }
-          })
+          );
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
 
     //过滤条件事件
-    schoolTermChange (val) {
-      this.queryObj.term = val
-      this.schoolTerm = val
+    schoolTermChange(val) {
+      this.queryObj.term = val;
+      this.schoolTerm = val;
       classStudentSubjectScoreClassSubjectScoreList({
         classId: this.queryObj.classId,
         term: val,
@@ -174,15 +176,15 @@ export default {
         type: 1
       }).then(res => {
         if (res.data.code == 200) {
-          this.tableData = res.data.data
-          console.log(res.data.data)
+          this.tableData = res.data.data;
+          console.log(res.data.data);
         }
-      })
+      });
     },
 
-    eaminationChange (val) {
-      this.queryObj.examType = val
-      this.eaminationType = val
+    eaminationChange(val) {
+      this.queryObj.examType = val;
+      this.eaminationType = val;
       classStudentSubjectScoreClassSubjectScoreList({
         classId: this.queryObj.classId,
         subjectId: this.queryObj.subjectId,
@@ -191,16 +193,16 @@ export default {
         examType: val
       }).then(res => {
         if (res.data.code == 200) {
-          this.tableData = res.data.data
-          console.log(res.data.data)
+          this.tableData = res.data.data;
+          console.log(res.data.data);
         }
-      })
+      });
     }
   },
   computed: {
-    ...mapState(['controlShow'])
+    ...mapState(["controlShow"])
   },
-  created () {
+  created() {
     //表格数据
     classStudentSubjectScoreClassSubjectScoreList({
       type: 1,
@@ -208,30 +210,30 @@ export default {
       classId: this.queryObj.classId
     }).then(res => {
       if (res.data.code == 200) {
-        console.log(res.data.data)
-        this.tableData = res.data.data
+        console.log(res.data.data);
+        this.tableData = res.data.data;
       } else {
-        console.log(res)
+        console.log(res);
       }
-    })
+    });
 
     //学期下拉列表
     schoolTermSchoolTermList().then(res => {
       if (res.data.code == 200) {
-        console.log(res.data.data)
-        this.schoolTermObj = res.data.data
+        console.log(res.data.data);
+        this.schoolTermObj = res.data.data;
       }
-    })
+    });
 
     //考试下拉列表
     examTypeExamTypeList({ type: 1 }).then(res => {
       if (res.data.code == 200) {
-        console.log(res.data.data)
-        this.eaminationTypeObj = res.data.data
+        console.log(res.data.data);
+        this.eaminationTypeObj = res.data.data;
       }
-    })
+    });
   }
-}
+};
 </script>
 
 <style lang="scss">

@@ -1,67 +1,71 @@
 <template>
   <header>
-    <div class="title">
-      <img src="/static/img/logo.png" alt> 咪师教师平台
-    </div>
-    <div class="select-nav">
-      <span>更换:</span>
-      <el-select v-model="value" placeholder="请选择" @change="SchoolChange">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.schoolName"
-          :value="item.schoolId"
-        ></el-option>
-      </el-select>
-    </div>
-    <div class="header-nav">
-      <el-dropdown
-        placement="top"
-        v-if="controlShow.headerNav==0?true:false"
-        @command="headerNavOneClick"
-      >
-        <span class="el-dropdown-link">审批与发布</span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            v-for="data in headerNavOneData"
-            :key="data.value"
-            :command="data.name"
-          >{{data.label}}</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-
-      <el-dropdown
-        placement="top"
-        v-if="controlShow.headerNav==0?true:false"
-        @command="headerNavTwoClick"
-        v-hasButton
-      >
-        <span class="el-dropdown-link">班级管理</span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            v-for="data in headerNavTwoData"
-            :key="data.value"
-            :command="data.name"
-          >{{data.label}}</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-
-      <div class="try" v-if="controlShow.headerNav==1?true:false" @click="picktry">
-        <img src="/static/img/cousor.png" alt>点我试试
+    <div class="header_container">
+      <div class="title">
+        <img src="/static/img/logo.png" alt> 咪师教师平台
       </div>
+      <div class="select-nav">
+        <span>更换:</span>
+        <el-tooltip class="item" effect="dark" :content="contentText" placement="bottom">
+          <el-select v-model="value" placeholder="请选择" @change="SchoolChange">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.schoolName"
+              :value="item.schoolId"
+            ></el-option>
+          </el-select>
+        </el-tooltip>
+      </div>
+      <div class="header-nav">
+        <el-dropdown
+          placement="top"
+          v-if="controlShow.headerNav==0?true:false"
+          @command="headerNavOneClick"
+        >
+          <span class="el-dropdown-link">审批与发布</span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="data in headerNavOneData"
+              :key="data.value"
+              :command="data.name"
+            >{{data.label}}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
-      <el-dropdown placement="top" @command="headerNavThreeClick">
-        <span class="el-dropdown-link">{{headerInfo}}</span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="info">个人信息</el-dropdown-item>
+        <el-dropdown
+          placement="top"
+          v-if="controlShow.headerNav==0?true:false"
+          @command="headerNavTwoClick"
+          v-hasButton
+        >
+          <span class="el-dropdown-link">班级管理</span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="data in headerNavTwoData"
+              :key="data.value"
+              :command="data.name"
+            >{{data.label}}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
-          <el-dropdown-item command="suggestion">意见反馈</el-dropdown-item>
+        <div class="try" v-if="controlShow.headerNav==1?true:false" @click="picktry">
+          <img src="/static/img/cousor.png" alt>点我试试
+        </div>
 
-          <el-dropdown-item command="out">退出</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+        <el-dropdown placement="top" @command="headerNavThreeClick">
+          <span class="el-dropdown-link">{{headerInfo}}</span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="info">个人信息</el-dropdown-item>
+
+            <el-dropdown-item command="suggestion">意见反馈</el-dropdown-item>
+
+            <el-dropdown-item command="out">退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+      <Suggestion :isShow.sync="Show"></Suggestion>
     </div>
-    <Suggestion :isShow.sync="Show"></Suggestion>
   </header>
 </template>
 
@@ -69,7 +73,6 @@
 //接口学校列表
 import { teacherSchools, switchSchool } from "@/api/api.js";
 import { mapState, mapActions } from "vuex";
-
 import Suggestion from "@/components/publicTemplate/dialogList/dialogSuggestion";
 
 export default {
@@ -99,13 +102,18 @@ export default {
         { value: "4", label: "班级学生", name: "StudentGradeClass" },
         { value: "5", label: "学生家长", name: "Family" },
         { value: "6", label: "学业成绩", name: "schoolAchievement" },
-        { value: "7", label: "平时成绩", name: "PeacetimePerformance" }
+        { value: "7", label: "平时成绩", name: "PeacetimePerformance" },
+        { value: "8", label: "发送记录", name: "" }
       ]
       // headerNavThreeData: [{}]
     };
   },
   computed: {
-    ...mapState(["controlShow", "crumbsList"])
+    ...mapState(["controlShow", "crumbsList"]),
+    contentText() {
+      return this.transform(this.value, "schoolId", this.options, "schoolName")
+        .val;
+    }
   },
   methods: {
     ...mapActions([
@@ -180,7 +188,7 @@ export default {
     // console.log(this.setCrumbsList())
     // console.log(this.value)
     teacherSchools().then(res => {
-      console.log(res);
+      console.log(res, 1);
       this.options = res.data.data;
       // console.log(res)
     });

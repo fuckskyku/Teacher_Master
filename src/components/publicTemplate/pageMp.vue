@@ -126,8 +126,13 @@ export default {
 
         //其他参数(考勤分页其他参数))
         startDate:
-          this.otherType && this.otherType[0] ? this.otherType[0] : null,
-        endDate: this.otherType && this.otherType[1] ? this.otherType[1] : null,
+          this.otherType && this.otherType.valueDateOne
+            ? this.otherType.valueDateOne
+            : null,
+        endDate:
+          this.otherType && this.otherType.valueDateTwo
+            ? this.otherType.valueDateTwo
+            : null,
         //其他参数(考勤详情分页其他参数和过滤参数)
         checkDate:
           this.otherType && this.otherType.checkDate
@@ -214,8 +219,13 @@ export default {
         searchWord: this.searchsVal,
         //其他参数(考勤分页其他参数))
         startDate:
-          this.otherType && this.otherType[0] ? this.otherType[0] : null,
-        endDate: this.otherType && this.otherType[1] ? this.otherType[1] : null,
+          this.otherType && this.otherType.valueDateOne
+            ? this.otherType.valueDateOne
+            : null,
+        endDate:
+          this.otherType && this.otherType.valueDateTwo
+            ? this.otherType.valueDateTwo
+            : null,
 
         //其他参数
         checkDate: this.otherType ? this.otherType.checkDate : null,

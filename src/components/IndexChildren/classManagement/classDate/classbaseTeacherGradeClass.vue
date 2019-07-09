@@ -28,6 +28,7 @@ export default {
       tableData: []
     }
   },
+  
   methods: {
     LookMe(row) {
       this.$router.push({
@@ -42,6 +43,7 @@ export default {
   created() {
     //表格数据
     gradeClassInfo().then(res => {
+      console.log(res.data,1)
       if (res.data.code == 200) {
         console.log(res.data.data)
         this.tableData = res.data.data

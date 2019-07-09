@@ -53,6 +53,7 @@
             placeholder="选择日期"
             v-model="form.eaminationTime"
             value-format="yyyy-MM-dd"
+            :picker-options="pickerOptions"
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="考试成绩" class="tip-content">
@@ -81,7 +82,7 @@
           <a href="/static/template/学生成绩导入模板.xls" download>下载模板</a>
           <!-- <el-button type="primary" @click="">请导入考试成绩</el-button>-->
         </el-form-item>
-        
+
         <el-form-item>
           <el-button type="primary" @click="submit">提交</el-button>
           <!-- <el-button>取消</el-button> -->
@@ -156,7 +157,14 @@ export default {
       tableData: [],
       eaminationDelAllObj: [],
       fileFlag: false,
-      fileFlagErr: false
+      fileFlagErr: false,
+      //控制修改考试类型的标识
+      editFlag: true,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now() - 8.64e6;
+        }
+      }
     };
   },
 
@@ -423,7 +431,6 @@ export default {
                   message: `${res.data.message}`
                 });
               }
-
               this.examTypeExamTypePageFun();
               this.examTypeExamTypeListFun();
             });
@@ -448,11 +455,10 @@ export default {
         });
     },
     edit(row) {
-      console.log("row", row);
       this.$prompt("请输入类型", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消"
-      }).then(({ value }) => {
+      }).then(({ value, action }) => {
         if (value != null) {
           examTypeSave({
             id: row.id,
@@ -474,7 +480,7 @@ export default {
             }
           });
         }
-        // else {
+        //  else {
         //   this.$message({
         //     type: "error",
         //     message: "修改失败"
