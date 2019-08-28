@@ -31,7 +31,7 @@
     <div class="upload_type" v-if="controlShow.leading_in==1?true:false">
       <div class="upload_text">
         请
-        <a href="/static/template/咪师学生导入模板.xlsx" download>下载模板</a>，按照模板上传本班的学生家长数据
+        <a href="/static/template/喵喵学生导入模板.xlsx" download>下载模板</a>，按照模板上传本班的学生家长数据
       </div>
       <div class="upload_file">
         <input type="text" class="file_input" disabled>
@@ -666,7 +666,7 @@ export default {
     //           message: h(
     //             "i",
     //             { style: "color: teal" },
-    //             "红包领取异常！请联系咪师客服人员"
+    //             "红包领取异常！请联系喵喵客服人员"
     //           )
     //         });
     //       } else {

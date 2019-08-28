@@ -2,7 +2,7 @@
   <header>
     <div class="header_container">
       <div class="title">
-        <img src="/static/img/logo.png" alt> 咪师教师平台
+        <img src="/static/img/logo.png" alt> 喵喵教师平台
       </div>
       <div class="select-nav">
         <span>更换:</span>

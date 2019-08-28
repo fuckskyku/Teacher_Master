@@ -20,7 +20,7 @@
       <div>
         <img src="/static/logoYellow.png" alt="LOGO">
       </div>
-      <div>咪师校园</div>
+      <div>喵喵校园</div>
       <!-- fjalsfjlksajf <input type="text"> -->
       <el-form
         ref="form"
@@ -110,12 +110,12 @@
             href="http://mseenet.com/TeacherProtocol/protocolTwo.html"
             target="_block"
             class="protocol"
-          >《咪师校园用户注册协议》</a>
+          >《喵喵校园用户注册协议》</a>
           <a
             href="http://mseenet.com/TeacherProtocol/protocolOne.html"
             target="_block"
             class="protocol"
-          >《咪师校园使用规则〉</a>
+          >《喵喵校园使用规则〉</a>
         </div>
       </div>
     </div>

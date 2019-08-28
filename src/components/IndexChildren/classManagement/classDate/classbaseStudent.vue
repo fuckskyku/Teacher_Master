@@ -25,7 +25,7 @@
         <el-button icon="el-icon-plus" class="seach_yellow" round @click="addStudent">新增学生</el-button>
         <el-button icon="el-icon-download" class="seach_yellow" round>
           <!-- 下载模板 -->
-          <a href="/static/template/咪师学生导入模板.xlsx" download style="color:black">下载模板</a>
+          <a href="/static/template/喵喵学生导入模板.xlsx" download style="color:black">下载模板</a>
           <!-- <a href="https://baidu.com/">下载模板</a> -->
         </el-button>
 
@@ -767,7 +767,7 @@ export default {
     },
     // download() {
     //   // window.location.host +
-    //   window.open('/template/咪师学生导入模板.xlsx')
+    //   window.open('/template/喵喵学生导入模板.xlsx')
     // },
 
     //学生头像
